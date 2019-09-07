@@ -3,13 +3,13 @@ from distutils.core import setup
 setup(
   name = 'dracaufeu',
   packages = ['dracaufeu'],
-  version = '0.1',
+  version = '0.2',
   license='MIT',
   description = 'Pytorch extension package for personal use',
   author = 'Etienne Meunier',
   author_email = 'etiennemeunier@live.fr',
   url = 'https://github.com/Etienne-Meunier/dracaufeu',
-  download_url = 'https://github.com/Etienne-Meunier/dracaufeu/archive/v_01.tar.gz',
+  download_url = 'https://github.com/Etienne-Meunier/dracaufeu/archive/v_02.tar.gz',
   keywords = ['Pytorch', 'DeepLearning'],
   install_requires=[],
   classifiers=[
