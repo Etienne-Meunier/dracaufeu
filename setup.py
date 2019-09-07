@@ -1,8 +1,9 @@
 from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(
   name = 'dracaufeu',
-  packages = ['dracaufeu'],
+  packages = find_packages(),
   version = '0.3',
   license='MIT',
   description = 'Pytorch extension package for personal use',
