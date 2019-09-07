@@ -4,13 +4,13 @@ from setuptools import setup, find_packages
 setup(
   name = 'dracaufeu',
   packages = find_packages(),
-  version = '0.3',
+  version = '0.4',
   license='MIT',
   description = 'Pytorch extension package for personal use',
   author = 'Etienne Meunier',
   author_email = 'etiennemeunier@live.fr',
   url = 'https://github.com/Etienne-Meunier/dracaufeu',
-  download_url = 'https://github.com/Etienne-Meunier/dracaufeu/archive/v_03.tar.gz',
+  download_url = 'https://github.com/Etienne-Meunier/dracaufeu/archive/v_04.tar.gz',
   keywords = ['Pytorch', 'DeepLearning'],
   install_requires=[],
   classifiers=[
