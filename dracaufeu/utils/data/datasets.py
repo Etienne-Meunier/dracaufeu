@@ -28,7 +28,9 @@ class CsvClassificationDataset(Dataset) :
                 on the sample
         """
 
-        self.labels = pd.read_csv(csv_file)
+        csv = pd.read_csv(csv_file)
+        self.classes = csv.iloc[:,1].unique()
+        self.imgs =  [tuple(x) for x in csv.values]
         self.root_dir = root_dir
         self.transform = transform
 
@@ -46,20 +48,20 @@ class CsvClassificationDataset(Dataset) :
             idx : index of the item to return
 
         Returns :
-            Sample dict as {'image','label'}
+            Sample tuple as (image,label)
         """
         if torch.is_tensor(idx) :
             # We need a list for pandas operations
             idx = idx.tolist()
         # Load the image
-        img_name = self.labels.iloc[idx,0]
+        img_name = self.imgs[idx][0]
         if self.root_dir:
             img_name = os.path.join(self.root_dir,img_name)
         image = default_loader(img_name)
         if self.transform :
             image = self.transform(image)
-        label = self.labels.iloc[idx,1]
-        sample = {'image':image, 'label':label}
+        label = self.imgs[idx][1]
+        sample = (image, label)
         return sample
 
 
