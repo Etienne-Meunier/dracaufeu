@@ -14,9 +14,9 @@ class CsvClassificationDataset(Dataset) :
     """
     Dataset with a csv indication label for classification
         Path Image          Label
-        .../1.png             0
-        .../2.png             1
-        .../3.png             0
+        .../1.png           'cat'
+        .../2.png           'dog'
+        .../3.png           'dog'
     """
 
     def __init__(self,csv_file,root_dir=None,transform=None) :
@@ -28,8 +28,12 @@ class CsvClassificationDataset(Dataset) :
                 on the sample
         """
 
-        csv = pd.read_csv(csv_file)
-        self.classes = csv.iloc[:,1].unique()
+        csv = pd.read_csv(csv_file, header=None, names=['images','labels'])
+        labels = csv['labels'].astype('category')
+        self.class_to_idx = dict(zip(labels,labels.cat.codes))
+        self.classes = list(labels.cat.categories)
+        csv['labels'] = labels.cat.codes
+        self.targets = csv['labels'].tolist()
         self.imgs =  [tuple(x) for x in csv.values]
         self.root_dir = root_dir
         self.transform = transform
@@ -38,7 +42,7 @@ class CsvClassificationDataset(Dataset) :
         """
             Return the len of the dataset overwrite function from Dataset
         """
-        return len(self.labels)
+        return len(self.imgs)
 
     def __getitem__(self, idx) :
         """
